@@ -13,7 +13,7 @@ from launch.launch_context import LaunchContext
 
 def generate_launch_description():
     neo_mpo_500 = get_package_share_directory('neo_mpo_500-2')
-    robot_namespace = LaunchConfiguration('robot_namespace', default='', value_type=str)
+    robot_namespace = LaunchConfiguration('robot_namespace', default='mpo500')
     context = LaunchContext()
 
     urdf = os.path.join(get_package_share_directory('neo_mpo_500-2'), 'robot_model', 'mpo_500.urdf')
