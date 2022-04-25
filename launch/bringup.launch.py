@@ -13,7 +13,7 @@ from launch.launch_context import LaunchContext
 
 def generate_launch_description():
     neo_mpo_500 = get_package_share_directory('neo_mpo_500-2')
-    robot_namespace = LaunchConfiguration('robot_namespace', default='')
+    robot_namespace = LaunchConfiguration('robot_namespace', default='', value_type=str)
     context = LaunchContext()
 
     urdf = os.path.join(get_package_share_directory('neo_mpo_500-2'), 'robot_model', 'mpo_500.urdf')
@@ -79,4 +79,3 @@ def generate_launch_description():
             parameters=[{'input_topic': robot_namespace.perform(context) + "lidar_2/scan_filtered",'output_topic': robot_namespace.perform(context) + "scan"}])
 
     return LaunchDescription([relayboard, start_robot_state_publisher_cmd, laser, kinematics, teleop, relay_topic_lidar1, relay_topic_lidar2])
-    
