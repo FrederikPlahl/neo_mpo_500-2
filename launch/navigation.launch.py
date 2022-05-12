@@ -1,17 +1,16 @@
-#Neobotix
+# Neobotix GmbH
+# Author: Pradheep Padmanabhan
 
 import os
-
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import GroupAction
-from launch.actions import IncludeLaunchDescription
-from launch_ros.actions import PushRosNamespace
-from launch.conditions import IfCondition
+from launch.actions import IncludeLaunchDescription, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch_ros.actions import Node, PushRosNamespace
+from launch.conditions import IfCondition
+
 
 def generate_launch_description():
     use_multi_robots = LaunchConfiguration('use_multi_robots', default='False')
@@ -20,13 +19,12 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='False')
     autostart = LaunchConfiguration('autostart', default='true')
     namespace = LaunchConfiguration('namespace', default='')
-    
     map_dir = LaunchConfiguration(
         'map',
         default=os.path.join(
             get_package_share_directory('neo_mpo_500-2'),
             'configs/navigation/maps',
-            'test.yaml'))
+            'test1.yaml'))
 
     param_file_name = 'navigation.yaml'
     param_dir = LaunchConfiguration(
@@ -36,7 +34,7 @@ def generate_launch_description():
             'configs/navigation',
             param_file_name))
 
-    nav2_launch_file_dir = os.path.join(get_package_share_directory('nav2_bringup'), 'launch')
+    nav2_launch_file_dir = os.path.join(get_package_share_directory('neo_nav2_bringup'), 'launch')
 
     ld = LaunchDescription()
 
