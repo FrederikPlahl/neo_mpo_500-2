@@ -14,7 +14,13 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-
+    use_multi_robots = LaunchConfiguration('use_multi_robots', default='False')
+    head_robot = LaunchConfiguration('head_robot', default='False')
+    use_amcl = LaunchConfiguration('use_amcl', default='False')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='False')
+    autostart = LaunchConfiguration('autostart', default='true')
+    namespace = LaunchConfiguration('namespace', default='')
+    
     map_dir = LaunchConfiguration(
         'map',
         default=os.path.join(
